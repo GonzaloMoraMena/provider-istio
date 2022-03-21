@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: provider-v1
+  labels:
+    app: provider
+    version: v1
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: provider
+      labels:
+        app: provider
+        version: v1
+    spec:
+      containers:
+        - name: provider-v1
+          image: provider:v1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+      restartPolicy: Always
+  selector:
+    matchLabels:
+      app: provider
+      version: v1
